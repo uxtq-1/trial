@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="[SERVER_GENERATED_CSRF_TOKEN]" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    connect-src 'self' https://www.virustotal.com https://script.google.com https://www.google.com https://www.gstatic.com /verify-recaptcha;
+    script-src 'self' https://www.google.com https://www.gstatic.com 'nonce-[SERVER_GENERATED_NONCE]';
+    style-src 'self' 'nonce-[SERVER_GENERATED_NONCE]';
+    img-src 'self' data:;
+    font-src 'self';
+    form-action 'self' /submit-vuln /submit-contact;
+    frame-ancestors 'none';
+    object-src 'none';
+    base-uri 'self';
+    report-uri https://your-report-endpoint.example.com/csp-violations;
+    require-sri-for script style;" />
+  <title>OPS Online Support – Secure Forms</title>
+  <link rel="stylesheet" href="/css/tailwind.css" /> <!-- Optional: integrity="[SRI_HASH_TAILWINDCSS]" -->
+  <link rel="stylesheet" href="/css/global.css" />
+  <script src="https://www.google.com/recaptcha/api.js?render=[YOUR_RECAPTCHA_SITE_KEY]" nonce="[SERVER_GENERATED_NONCE]" async defer integrity="[SRI_HASH_RECAPTCHA]" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <h1 class="text-2xl font-bold mb-4">OPS Online Support – Secure Forms</h1>
+  <form id="securityForm" class="bg-white rounded shadow p-4 mb-6" method="post" action="/submit-vuln">
+    <h2 class="text-xl font-semibold mb-3">🔐 Vulnerability Disclosure</h2>
+    <input type="text" name="hp" class="hp-field" aria-hidden="true" />
+    <label for="vuln-name" class="block mb-1">Name / Alias</label>
+    <input type="text" id="vuln-name" class="border w-full p-2 mb-3" required aria-required="true" />
+    <label for="vuln-details" class="block mb-1">Details</label>
+    <textarea id="vuln-details" class="border w-full p-2 mb-3" rows="5" required aria-required="true"></textarea>
+    <div class="g-recaptcha mb-3" data-sitekey="[YOUR_RECAPTCHA_SITE_KEY]"></div>
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Submit Securely</button>
+  </form>
+  <form id="contactForm" class="bg-white rounded shadow p-4" method="post" action="/submit-contact" enctype="multipart/form-data">
+    <h2 class="text-xl font-semibold mb-3">📨 Join Us / Contact Us</h2>
+    <input type="text" name="hp" class="hp-field" aria-hidden="true" />
+    <label for="contact-name" class="block mb-1">Full Name</label>
+    <input type="text" id="contact-name" class="border w-full p-2 mb-3" required aria-required="true" />
+    <label for="contact-email" class="block mb-1">Email</label>
+    <input type="email" id="contact-email" class="border w-full p-2 mb-3" required aria-required="true" />
+    <label for="contact-msg" class="block mb-1">Message</label>
+    <textarea id="contact-msg" class="border w-full p-2 mb-3" rows="4" required aria-required="true"></textarea>
+    <label for="contact-file" class="block mb-1">Upload (PDF, DOC, DOCX)</label>
+    <input type="file" id="contact-file" accept=".pdf,.doc,.docx" class="mb-3" />
+    <div class="g-recaptcha mb-3" data-sitekey="[YOUR_RECAPTCHA_SITE_KEY]"></div>
+    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Send Securely</button>
+  </form>
+  <script src="/js/secure-handler.js" nonce="[SERVER_GENERATED_NONCE]" defer integrity="[SRI_HASH_SECURE_HANDLER]"></script>
+</body>
+</html>
