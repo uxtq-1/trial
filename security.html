@@ -1,0 +1,44 @@
+<!-- security.html
+Purpose: Secure breach/vulnerability submission form.
+- Accepts text + DOC/PDF upload (max 25MB)
+- Uses Turnstile CAPTCHA for bot/spam control
+- Frontend sends to security-socket.js (WebSocket logic)
+- Real-time malware check, then encrypts and uploads securely
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OPS Security - Report a Breach</title>
+  <link rel="stylesheet" href="/css/security.css" />
+
+  <!-- Add Turnstile (Cloudflare CAPTCHA) here later -->
+</head>
+<body class="bg-gray-100 p-6">
+  <main class="container max-w-lg mx-auto">
+    <h1 class="text-2xl font-bold mb-4">🔐 OPS Security Disclosure Form</h1>
+
+    <form id="security-form" enctype="multipart/form-data">
+      <label for="reporter">Name or Alias:</label>
+      <input type="text" id="reporter" name="reporter" required />
+
+      <label for="details">Details (describe breach/vulnerability):</label>
+      <textarea id="details" name="details" required></textarea>
+
+      <label for="attachment">Upload (PDF/DOCX, max 25MB):</label>
+      <input type="file" id="attachment" name="attachment" accept=".pdf,.doc,.docx" required />
+
+      <div class="captcha-box">
+        <!-- Cloudflare Turnstile CAPTCHA will go here -->
+      </div>
+
+      <button type="submit">Submit Securely</button>
+    </form>
+
+    <section id="status" class="status-output mt-4"></section>
+  </main>
+  <script src="/js/security-socket.js" defer></script>
+</body>
+</html>
